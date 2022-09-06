@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% block head %}
+    {{ super() }}
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+{% endblock %}
+{% block title %}Authors{% endblock %}
+{% block content %}
+    <label for="authors">Choose an author:</label>
+
+    <select name="authors" id="authors" class="form-select">
+      <option value="0">All</option>
+      <option value="1">Riaan Rossouw</option>
+      <option value="2">Agatha Christie</option>
+    </select>
+
+    <div id="books">
+    <table class="table table-striped table-sm">
+        <thead>
+            <tr>
+              <th scope="col">Book Id</th>
+              <th scope="col">Title</th>
+              <th scope="col">Author Id</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for item in items %}
+            <tr>
+              <td><a href="{{ url_for('getBook',id=item.id) }}">{{item.id}}</a></td>
+              <td>{{item.title}}</td>
+              <td>{{item.author_id}}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    </div>
+    {% block javascript %}
+    <script>
+      $('#authors').change(function() {
+        console.log( this.value );
+      });
+    </script>
+    {% endblock %}
+{% endblock %}
